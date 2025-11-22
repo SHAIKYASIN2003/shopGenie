@@ -43,7 +43,7 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-20 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-indigo-100 flex flex-col z-50 overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300">
+    <div className="fixed bottom-20 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-indigo-100 flex flex-col z-50 overflow-hidden animate-slide-up">
       {/* Header */}
       <div className="bg-indigo-600 p-4 flex justify-between items-center text-white">
         <div className="flex items-center gap-2">
