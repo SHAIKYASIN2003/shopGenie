@@ -1,11 +1,14 @@
 import React, { useState, useEffect, createContext, useContext, useRef } from 'react';
-import { HashRouter as Router, Routes, Route, Link, useNavigate, useLocation, useParams } from 'react-router-dom';
-import { ShoppingCart, Menu, Search, User, Heart, X, Sparkles, ArrowRight, Check, Loader2, Trash2, Plus, Minus, MapPin, CreditCard, Star, Edit2, Save, LogOut, Repeat, Camera, Truck, Package, ShieldCheck, Clock } from 'lucide-react';
+import { HashRouter as Router, Routes, Route, Link, useNavigate, useParams } from 'react-router-dom';
+import { ShoppingCart, Menu, Search, User, Heart, X, Sparkles, ArrowRight, Check, Loader2, Trash2, Plus, Minus, MapPin, CreditCard, Star, Edit2, Save, LogOut, Repeat, Camera, Truck, ShieldCheck } from 'lucide-react';
 import { Product, CartItem, Category, User as UserType, Order } from './types';
 import { PRODUCTS } from './constants';
 import ProductCard from './components/ProductCard';
 import AIAssistant from './components/AIAssistant';
 import { getProductInsights } from './services/geminiService';
+
+// --- Constants ---
+const INPUT_STYLES = "w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-gray-50 focus:bg-white transition-colors";
 
 // --- Global State ---
 interface AppContextType {
@@ -816,10 +819,10 @@ const Checkout = () => {
             <MapPin className="w-5 h-5 text-indigo-600" /> Shipping Address
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input required type="text" placeholder="Full Name" defaultValue={user?.name} className="input-field col-span-2" />
-            <input required type="text" placeholder="Address" className="input-field col-span-2" />
-            <input required type="text" placeholder="City" className="input-field" />
-            <input required type="text" placeholder="ZIP / Postal" className="input-field" />
+            <input required type="text" placeholder="Full Name" defaultValue={user?.name} className={`${INPUT_STYLES} col-span-2`} />
+            <input required type="text" placeholder="Address" className={`${INPUT_STYLES} col-span-2`} />
+            <input required type="text" placeholder="City" className={INPUT_STYLES} />
+            <input required type="text" placeholder="ZIP / Postal" className={INPUT_STYLES} />
           </div>
         </div>
 
@@ -829,10 +832,10 @@ const Checkout = () => {
             <CreditCard className="w-5 h-5 text-indigo-600" /> Payment Method
           </h2>
           <div className="grid grid-cols-1 gap-4">
-            <input required type="text" placeholder="Card Number" className="input-field" />
+            <input required type="text" placeholder="Card Number" className={INPUT_STYLES} />
             <div className="grid grid-cols-2 gap-4">
-              <input required type="text" placeholder="MM/YY" className="input-field" />
-              <input required type="text" placeholder="CVC" className="input-field" />
+              <input required type="text" placeholder="MM/YY" className={INPUT_STYLES} />
+              <input required type="text" placeholder="CVC" className={INPUT_STYLES} />
             </div>
           </div>
         </div>
@@ -1003,14 +1006,14 @@ const Profile = () => {
                     type="text" 
                     value={formData.name} 
                     onChange={e => setFormData({...formData, name: e.target.value})}
-                    className="input-field py-2 text-lg font-bold"
+                    className={`${INPUT_STYLES} py-2 text-lg font-bold`}
                     placeholder="Your Name"
                   />
                   <input 
                     type="email" 
                     value={formData.email} 
                     onChange={e => setFormData({...formData, email: e.target.value})}
-                    className="input-field py-2 text-sm"
+                    className={`${INPUT_STYLES} py-2 text-sm`}
                     placeholder="Email Address"
                   />
                 </div>
@@ -1246,17 +1249,9 @@ const Layout = () => {
   );
 };
 
-// --- Styles ---
-const styleSheet = `
-  .input-field {
-    @apply w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-gray-50 focus:bg-white transition-colors;
-  }
-`;
-
 const App = () => {
   return (
     <Router>
-      <style>{styleSheet}</style>
       <AppProvider>
         <Layout />
       </AppProvider>
